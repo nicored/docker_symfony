@@ -1,0 +1,26 @@
+application:
+    volumes:
+        # <projectPath>:<destination>
+        - ../../../mysymfonyapp:/var/www/mysymfonyapp
+        - ../params/dev/mysymfonyapp/jwt:/var/www/mysymfonyapp/app/var/jwt
+        - /var/logs/mysymfonyapp:/var/www/mysymfonyapp/app/logs
+
+php:
+    links:
+        - db
+    env_file:
+        - ../params/dev/env/symfony.env
+
+db:
+    container_name: db
+    image: mysql
+    restart: always
+    ports:
+        - 3306:3306
+    env_file:
+        - ../params/dev/env/db.env
+
+nginx:
+    volumes:
+        - /var/logs/nginx:/var/logs/nginx
+        - ../params/dev/nginx/sites_available:/etc/nginx/sites_available

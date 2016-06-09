@@ -1,0 +1,36 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+
+# Note: PS1 and umask are already set in /etc/profile. You should not
+# need this unless you want different defaults for root.
+# PS1='${debian_chroot:+($debian_chroot)}\h:\w\$ '
+# umask 022
+
+# You may uncomment the following lines if you want `ls' to be colorized:
+# export LS_OPTIONS='--color=auto'
+# eval "`dircolors`"
+# alias ls='ls $LS_OPTIONS'
+# alias ll='ls $LS_OPTIONS -l'
+# alias l='ls $LS_OPTIONS -lA'
+#
+# Some more alias to avoid making mistakes:
+# alias rm='rm -i'
+# alias cp='cp -i'
+# alias mv='mv -i'
+
+alias dsql="/usr/bin/php /var/www/mysymfonyapp/app/console doctrine:schema:update --dump-sql"
+alias fsql="/usr/bin/php /var/www/mysymfonyapp/app/console doctrine:schema:update --force"
+alias dcmc="/usr/bin/php /var/www/mysymfonyapp/app/console doctrine:cache:clear-metadata"
+alias nox="/usr/sbin/php5dismod xdebug;service php5-fpm reload"
+alias xon="/usr/sbin/php5enmod xdebug;service php5-fpm reload"
+alias iwx="/usr/sbin/php5enmod xdebug;service php5-fpm reload"
+alias ccp="/usr/bin/php /var/www/mysymfonyapp/app/console cache:clear --env=prod --no-warmup"
+alias ccd="/usr/bin/php /var/www/mysymfonyapp/app/console cache:clear --env=dev --no-warmup"
+alias ccpd="/usr/bin/php /var/www/mysymfonyapp/app/console cache:clear --env=dev --no-warmup;/usr/bin/php /var/www/mysymfonyapp/app/console cache:clear --env=prod --no-warmup"
+
+isxdebug(){
+    if [ `php -i | grep xdebug | wc -l` -gt 0 ]; then
+        echo "XDEBUG IS ON"
+    else
+        echo "XDEBUG IS OFF"
+    fi
+}

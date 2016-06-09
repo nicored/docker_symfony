@@ -1,0 +1,26 @@
+application:
+    container_name: application
+    build: ../resources/code
+    tty: true
+
+php:
+    container_name: php
+    restart: always
+    build: ../resources/php-fpm/5.6
+    ports:
+        - 9000:9000
+    volumes_from:
+        - application
+    mem_limit: 8589934592
+    memswap_limit: 20000000000
+
+nginx:
+    container_name: nginx
+    restart: always
+    build: ../resources/nginx
+    ports:
+        - 80:80
+    links:
+        - php
+    volumes_from:
+        - application

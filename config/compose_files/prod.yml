@@ -1,0 +1,16 @@
+application:
+    volumes:
+        - /var/www/mysymfonyapp:/var/www/mysymfonyapp
+        - /var/logs/mysymfonyapp:/var/www/mysymfonyapp/app/logs
+        - ../params/prod/mysymfonyapp/jwt:/var/www/mysymfonyapp/app/var/jwt
+
+php:
+    depends-on:
+        - application
+    env_file:
+        - ../params/prod/env/symfony.env
+
+nginx:
+    volumes:
+        - /var/logs/nginx:/var/logs/nginx
+        - ../params/prod/nginx/sites_available:/etc/nginx/sites_available
